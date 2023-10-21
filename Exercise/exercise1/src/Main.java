@@ -26,10 +26,14 @@ public class Main {
         }
 
         session.print_scores_of_each_student();//print 15 scores of each student
-        //session.print_scores_of_students_in_ascending_order();//print 15 scores of each student in ascending order
-        System.out.println("The average quiz scores for 20 students are:"+session.average_quiz_scores()); //average scores of each student
-        session.print_average_quiz_scores_ascending_order();//prints average scores of 20 students in ascending order
+        System.out.println();
+        session.print_scores_of_students_in_ascending_order();//print 15 scores of each student in ascending order
+        System.out.println();
+        session.average_quiz_scores(); //average scores of each student
+        System.out.println();
+        //session.print_average_quiz_scores_ascending_order();//prints average scores of 20 students in ascending order
         session.print_names_part_time_students();//print names of part time students
+        System.out.println();
         session.print_exam_scores_full_time_students();//prints 2 exam scores of Full time students with their names
     }
 

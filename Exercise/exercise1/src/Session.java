@@ -34,19 +34,17 @@ class Session {
 
     }
 
-    public ArrayList<Double> average_quiz_scores() {
-        ArrayList<Double> average_quiz_scores = new ArrayList<>();
+    public void average_quiz_scores() {
         for (int i = 0; i < Students.size(); i++) {
-            average_quiz_scores.add(Students.get(i).calculate_average_score_for_each_student());
+            System.out.println("The average quiz score for " + Students.get(i).getStudent_name() + " is " + Double.toString(Students.get(i).calculate_average_score_for_each_student()));
         }
-        return average_quiz_scores;
     }
 
-    public void print_average_quiz_scores_ascending_order() {
+    /*public void print_average_quiz_scores_ascending_order() {
         List<Double> avg_quiz_scores_ascending_order = average_quiz_scores();
         Collections.sort(avg_quiz_scores_ascending_order);
         System.out.println("The average scores of 20 students in ascending order is: " + avg_quiz_scores_ascending_order);
-    }
+    }*/
 
     public void print_names_part_time_students() {
         System.out.println("Part-Time Students");
