@@ -19,15 +19,10 @@ class Session {
         return Students;
     }
 
-    public void print_scores_of_each_student() {
-        for (int i = 0; i < Students.size(); i++) {
-            System.out.println("The 15 scores of " + Students.get(i).getStudent_name()+" are: "+Students.get(i).getQuiz_scores());
-        }
-    }
 
     public void print_scores_of_students_in_ascending_order() {
         for (int i = 0; i < Students.size(); i++) {
-            ArrayList<Double> scores_of_each_student_in_ascending_order = Students.get(i).getQuiz_scores();
+            ArrayList<Integer> scores_of_each_student_in_ascending_order = Students.get(i).getQuiz_scores();
             Collections.sort(scores_of_each_student_in_ascending_order);
             System.out.println("The score of " + Students.get(i).getStudent_name() + " in ascending order is:" + scores_of_each_student_in_ascending_order);
         }
@@ -36,18 +31,13 @@ class Session {
 
     public void average_quiz_scores() {
         for (int i = 0; i < Students.size(); i++) {
-            System.out.println("The average quiz score for " + Students.get(i).getStudent_name() + " is " + Double.toString(Students.get(i).calculate_average_score_for_each_student()));
+            System.out.println("The average quiz score for " + Students.get(i).getStudent_name() + " is " + Float.toString(Students.get(i).calculate_average_score_for_each_student()));
         }
     }
 
-    /*public void print_average_quiz_scores_ascending_order() {
-        List<Double> avg_quiz_scores_ascending_order = average_quiz_scores();
-        Collections.sort(avg_quiz_scores_ascending_order);
-        System.out.println("The average scores of 20 students in ascending order is: " + avg_quiz_scores_ascending_order);
-    }*/
 
     public void print_names_part_time_students() {
-        System.out.println("Part-Time Students");
+        System.out.println("The names of Part-Time Students are:"+"\n");
         for (int i = 0; i < Students.size(); i++) {
             if (Students.get(i).getClass().equals(PartTime.class)) {
                 System.out.println(Students.get(i).getStudent_name());
@@ -57,7 +47,7 @@ class Session {
 
     public void print_exam_scores_full_time_students()
     {
-        System.out.println("Full-Time Students");
+        System.out.println("The names of Full-Time Students with their 2 exam scores are:"+"\n");
         for (int i = 0; i < Students.size(); i++) {
             if (Students.get(i).getClass().equals(FullTime.class)) {
                 FullTime fulltime_student = (FullTime) Students.get(i);
