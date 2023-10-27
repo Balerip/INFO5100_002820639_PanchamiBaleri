@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class Triangle extends Shape{
     private final float side_a;
     private final float side_b;
@@ -25,7 +27,8 @@ class Triangle extends Shape{
     //implementing the calculateArea method of the shape class and overriding it
     public void calculateArea()
     {
-        System.out.println("The area of the triangle is : "+calculateArea(5.0f,7.0f)+" cm^2");
+        Random r=new Random();
+        System.out.println("The area of the triangle is : "+calculateArea(r.nextFloat(10),r.nextFloat(5))+" cm^2");
     }
     //implementing the calculatePerimeter and overriding it
     @Override
