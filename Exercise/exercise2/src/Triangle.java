@@ -18,8 +18,7 @@ class Triangle extends Shape{
     @Override
     public double calculateArea(float base,float height)
     {
-        double area=0.5*base*height;
-        return area;
+        return super.calculateArea(base,height);
     }
 
     @Override
