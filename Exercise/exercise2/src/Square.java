@@ -1,6 +1,6 @@
 class Square extends Shape {
 
-    private float final side;
+    private final float side;
     //creating the constructor to call super class constructor with the colour variable and initialising the side variable
     public Square(String colour, float side)
     {

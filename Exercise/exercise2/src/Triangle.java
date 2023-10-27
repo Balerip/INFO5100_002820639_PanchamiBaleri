@@ -1,7 +1,7 @@
 class Triangle extends Shape{
-    private float side_a;
-    private float side_b;
-    private float side_c;
+    private final float side_a;
+    private final float side_b;
+    private final float side_c;
 
 
     /*creating a triangle constructor with 3 sides as parameter
@@ -21,7 +21,9 @@ class Triangle extends Shape{
         double area=0.5*base*height;
         return area;
     }
-    //implementing the calculateArea method of the shape class
+
+    @Override
+    //implementing the calculateArea method of the shape class and overriding it
     public void calculateArea()
     {
         System.out.println("The area of the triangle is : "+calculateArea(5.0f,7.0f)+" cm^2");

@@ -1,5 +1,5 @@
 class Circle extends Shape {
-    private float final radius;
+    private final float radius;
 
 
     //creating the constructor to call super class constructor with the colour variable and initialising the radius variable
