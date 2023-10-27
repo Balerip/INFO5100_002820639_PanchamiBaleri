@@ -16,19 +16,12 @@ class Triangle extends Shape{
         this.side_c=side_c;
     }
 
-    //Overriding the overloaded calculateArea method with parameters of the shape class
-    @Override
-    public double calculateArea(float base,float height)
-    {
-        return super.calculateArea(base,height);
-    }
-
-    @Override
     //implementing the calculateArea method of the shape class and overriding it
+    @Override
     public void calculateArea()
     {
         Random r=new Random();
-        System.out.println("The area of the triangle is : "+calculateArea(r.nextFloat(10),r.nextFloat(5))+" cm^2");
+        System.out.println("The area of the triangle is : "+super.calculateArea(r.nextFloat(10),r.nextFloat(5))+" cm^2");
     }
     //implementing the calculatePerimeter and overriding it
     @Override

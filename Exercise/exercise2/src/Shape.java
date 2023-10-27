@@ -21,9 +21,9 @@ abstract class Shape
 
     /*demonstrating method overloading as a part of polymorphism on calculate area method
     and overriding this method in the triangle class*/
-    public double calculateArea(float a,float b)
+    public double calculateArea(float base,float height)
     {
-        return 0.5*a*b;
+        return 0.5*base*height;
     }
 
 
