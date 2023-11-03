@@ -5,6 +5,7 @@ public class SerializeDeserialize {
         try (FileOutputStream fileOutputStream = new FileOutputStream(shapeData);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(shape);
+            System.out.println("Object has been serialized\n" + "Data before Deserialization.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
