@@ -1,5 +1,5 @@
 //created an abstract class Shape
-abstract class Shape implements java.io.Serializable
+public abstract class Shape implements java.io.Serializable
 {
     private static final double pi=Math.PI;// created pi as static and final variable
     private String colour;// created the colour variable as static
