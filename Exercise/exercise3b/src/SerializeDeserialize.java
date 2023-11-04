@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class SerializeDeserialize {
-    public static void serialize(Shape shape, String shapeData) {
+    public static void serialize(Shape shape, String shapeFileName) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(shapeData);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(shape);
@@ -10,7 +10,7 @@ public class SerializeDeserialize {
         }
     }
 
-    public static Shape deserialize(String shapeData) {
+    public static Shape deserialize(String shapeFileName) {
         try (FileInputStream fileInputStream = new FileInputStream(shapeData);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             return (Shape) objectInputStream.readObject();
