@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
                 String negativecase4="94536";
 
                 String positivecase5="woah woah woah";
-                String negativecase5="hihihihihi";
+                String negativecase5="hi hi hi";
 
 
 
