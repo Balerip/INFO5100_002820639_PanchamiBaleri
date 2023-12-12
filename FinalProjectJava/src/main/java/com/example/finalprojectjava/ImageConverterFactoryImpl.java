@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+// Implementation of ImageConverterFactory
 class ImageConverterFactoryImpl implements ImageConverterFactory {
     private String imageType;
 
