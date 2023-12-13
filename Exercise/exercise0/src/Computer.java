@@ -23,14 +23,14 @@ class Computer {
         this.size = size;
         this.price = price;
         this.battery_life = battery_life;
-        System.out.println("Instance of Computer class created with unique id"+computer_id);
+        System.out.println("Instance of Computer class created with unique id "+computer_id);
     }
 
     public void computer_portability() {
         if (this.type == "Personal Computer") {
-            System.out.println("The" + this.type + "is not portable");
+            System.out.println("The " + this.type + " is not portable");
         } else if (this.type == "Laptop") {
-            System.out.println("The" + this.type + "is portable");
+            System.out.println("The " + this.type + " is portable");
         }
     }
 
@@ -47,11 +47,11 @@ class Computer {
 
     public void screen_size() {
         if (this.type == "Personal Computer") {
-            System.out.println("The" + this.type + "can be used for purposes that require big screen");
+            System.out.println("The " + this.type + " can be used for purposes that require big screen");
         } else if (this.type == "Laptop") {
-            System.out.println("The" + this.type + "can be used for purposes that does not require big screen");
+            System.out.println("The " + this.type + " can be used for purposes that does not require big screen");
         } else {
-            System.out.println("The" + this.type + "is used for purposes that needs reading and basic stuff");
+            System.out.println("The " + this.type + " is used for purposes that needs reading and basic stuff");
         }
 
     }

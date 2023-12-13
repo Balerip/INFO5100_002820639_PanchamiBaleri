@@ -22,7 +22,7 @@ class Wardrobe {
             this.no_of_shelves = no_of_shelves;
             this.has_mirror = has_mirror;
             this.door_type = door_type;
-            System.out.println("Instance of Wardrobe class created with unique id"+wardrobe_id);
+            System.out.println("Instance of Wardrobe class created with unique id "+wardrobe_id);
         }
 
         public void is_detachable()

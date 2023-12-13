@@ -21,25 +21,25 @@ class Bag {
         this.has_pockets = has_pockets;
         this.price = price;
         this.material = material;
-        System.out.println("Instance of Bag class created with unique id"+bag_id);
+        System.out.println("Instance of Bag class created with unique id "+bag_id);
     }
 
     public void purpose()
     {
         if(this.bag_type=="bagpack")
         {
-            System.out.println(this.bag_type+"can be used to carry to school or colleges");
+            System.out.println(this.bag_type+" can be used to carry to school or colleges");
         }
         else if(this.bag_type=="tote")
         {
-            System.out.println(this.bag_type+"can be used to carry for shopping");
+            System.out.println(this.bag_type+" can be used to carry for shopping");
         }
     }
     public void bag_holding_capacity(double pocket_capacity) {
         if (this.has_pockets) {
-            System.out.println("The capacity of" + this.bag_type + "is" + Double.toString(this.bag_capacity + pocket_capacity));
+            System.out.println("The capacity of " + this.bag_type + " is: " + Double.toString(this.bag_capacity + pocket_capacity));
         } else {
-            System.out.println("The capacity of" + this.bag_type + "is" + Double.toString(this.bag_capacity));
+            System.out.println("The capacity of " + this.bag_type + " is: " + Double.toString(this.bag_capacity));
         }
     }
 

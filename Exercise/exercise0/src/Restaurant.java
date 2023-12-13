@@ -24,7 +24,7 @@ class Restaurant {
         this.is_rooftop = is_rooftop;
         this.customers = customers;
         this.restaurant_open = restaurant_open;
-        System.out.println("Instance of Restaurant class created with unique id"+restaurant_id);
+        System.out.println("Instance of Restaurant class created with unique id "+restaurant_id);
     }
 
     public void chef_special_availability()

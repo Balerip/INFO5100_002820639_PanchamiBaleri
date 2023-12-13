@@ -21,7 +21,7 @@ class Apartment{
         this.area = area;
         this.no_of_rooms = no_of_rooms;
         this.monthly_rent = monthly_rent;
-        System.out.println("Instance of Apartment class created with unique id"+apartment_id);
+        System.out.println("Instance of Apartment class created with unique id "+apartment_id);
     }
     public void check_maintainence_ease()
     {

@@ -27,7 +27,7 @@ class Television {
         this.ports=ports;
         this.screen_mirroring_enabled=screen_mirroring_enabled;
         this.enables_power_saving=enables_power_saving;
-        System.out.println("Instance of Television class created with unique id"+television_id);
+        System.out.println("Instance of Television class created with unique id "+television_id);
 
     }
 
@@ -46,11 +46,11 @@ class Television {
     {
         if(this.type=="Smart-Tv")
         {
-            System.out.print("The television is compatible with most devices");
+            System.out.println("The television is compatible with most devices");
         }
         else
         {
-            System.out.print("The television is not compatible with other devices");
+            System.out.println("The television is not compatible with other devices");
         }
     }
 
@@ -58,11 +58,11 @@ class Television {
     {
         if(this.screen_mirroring_enabled)
         {
-            System.out.print("Can be used to mirror content from other devices and gives better viewing experience");
+            System.out.println("Can be used to mirror content from other devices and gives better viewing experience");
         }
         else
         {
-            System.out.print("Cannot be used to mirror content from other devices");
+            System.out.println("Cannot be used to mirror content from other devices");
         }
     }
 

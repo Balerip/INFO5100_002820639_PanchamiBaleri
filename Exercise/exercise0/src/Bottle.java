@@ -25,12 +25,12 @@ class Bottle {
         this.brand = brand;
         this.capacity = capacity;
         this.is_reusable = is_reusable;
-        System.out.println("Instance of Bottle class created with unique id"+bottle_id);
+        System.out.println("Instance of Bottle class created with unique id "+bottle_id);
     }
 
     public void bottle_hold_capacity(double amount_to_be_filled) {
         if (amount_to_be_filled > this.capacity) {
-            System.out.print("The bottle can be filled only upto the capacity and hence reduce the amount to" + this.capacity);
+            System.out.println("The bottle can be filled only upto the capacity and hence reduce the amount to" + this.capacity);
         }
     }
 

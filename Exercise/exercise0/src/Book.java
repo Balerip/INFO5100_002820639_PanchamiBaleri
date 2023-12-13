@@ -21,18 +21,18 @@ class Book {
         this.readers_choice = readers_choice;
         this.language = language;
         this.softcopy_available = softcopy_available;
-        System.out.println("Instance of Book class created with unique id"+book_id);
+        System.out.println("Instance of Book class created with unique id "+book_id);
     }
 
     public void read()
     {
-        System.out.print("You can read the book");
+        System.out.println("You can read the book");
     }
     public void is_expensive()
     {
         if(this.price>14.0)
         {
-            System.out.print("The book is expensive");
+            System.out.println("The book is expensive");
         }
     }
 

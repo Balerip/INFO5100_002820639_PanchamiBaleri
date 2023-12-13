@@ -27,7 +27,7 @@ class ClassRoom {
         this.teaching_assistant_name = teaching_assistant_name;
         this.sitting_arrangement_type = sitting_arrangement_type;
         this.teaching_visual_aid = teaching_visual_aid;
-        System.out.println("Instance of Classroom class created with unique id"+classroom_id);
+        System.out.println("Instance of Classroom class created with unique id "+classroom_id);
 
 
     }
@@ -43,9 +43,9 @@ class ClassRoom {
     public void teach() {
         String instructor_presence="present";
         if (instructor_presence=="present") {
-            System.out.print("The lecture will be taught by" + this.instructor_name);
+            System.out.println("The lecture will be taught by " + this.instructor_name);
         } else {
-            System.out.print("The lecture will be taught by" + this.teaching_assistant_name);
+            System.out.println("The lecture will be taught by " + this.teaching_assistant_name);
         }
     }
 
