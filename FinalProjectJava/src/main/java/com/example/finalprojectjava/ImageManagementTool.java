@@ -73,7 +73,7 @@ public class ImageManagementTool extends Application {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
-            //Displaying image properties (height, width, location)
+            // Displaying image properties (height, width, location)
             File selectedFile = fileChooser.showOpenDialog(stage);
 
             if (selectedFile != null) {
@@ -90,32 +90,43 @@ public class ImageManagementTool extends Application {
                 int thumbnailWidth = 5;
                 int thumbnailHeight = 5;
 
-                //When uploaded, show image(s) thumbnail(s) (100x100) to users on GUI
+                // When uploaded, show image(s) thumbnail(s) (100x100) to users on GUI
                 Image thumbnail = new Image(selectedFile.toURI().toString());
                 ImageView thumbnailView = new ImageView(thumbnail);
                 thumbnailView.setFitHeight(100);
                 thumbnailView.setFitWidth(100);
-                vBox.getChildren().addAll(thumbnailView, imageInfoLabel);
+
+                // Clear previous content from vBox
+                vBox.getChildren().clear();
+
+                vBox.getChildren().addAll(imageUploadBottom, dropdownBox, thumbnailView, imageInfoLabel);
 
                 // Creating Download button
                 Button downloadButton = new Button("Download");
                 downloadButton.setStyle("-fx-background-color: #FFF0AA; -fx-text-fill: black;-fx-background-radius: 20;");
-                //Setting Download button action to allow users to download converted images
+
+                // Setting Download button action to allow users to download converted images
                 downloadButton.setOnAction(event -> {
                     try {
                         String selectedExtension = imageCombo.getValue().toUpperCase();
-                        FileChooser saveChooser = new FileChooser();
-                        saveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(selectedExtension, "*." + selectedExtension.toLowerCase()));
-                        File savedFile = saveChooser.showSaveDialog(stage);
+                        String originalExtension = getFileExtension(selectedFile).toUpperCase();
 
-                        if (savedFile != null) {
-                            // Use the factory to create the converter
-                            converterFactory = new ImageConverterFactoryImpl(selectedExtension);
-                            ImageConverter imageConverter = converterFactory.createImageConverter();
-                            imageConverter.convertAndSave(selectedFile, savedFile);
-                            downloadTips.setText("Download successfully");
+                        if (selectedExtension.equals(originalExtension)) {
+                            downloadTips.setText("Image is already in the"+"."+originalExtension.toLowerCase()+" Format. Choose a different extension for image download.");
                         } else {
-                            downloadTips.setText("Download canceled");
+                            FileChooser saveChooser = new FileChooser();
+                            saveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(selectedExtension, "*." + selectedExtension.toLowerCase()));
+                            File savedFile = saveChooser.showSaveDialog(stage);
+
+                            if (savedFile != null) {
+                                // Use the factory to create the converter
+                                converterFactory = new ImageConverterFactoryImpl(selectedExtension);
+                                ImageConverter imageConverter = converterFactory.createImageConverter();
+                                imageConverter.convertAndSave(selectedFile, savedFile);
+                                downloadTips.setText("Download successfully");
+                            } else {
+                                downloadTips.setText("Download canceled");
+                            }
                         }
                     } catch (ImageConversionException | IllegalArgumentException ex) {
                         downloadTips.setText("Download failed! Try another image.");
@@ -123,10 +134,20 @@ public class ImageManagementTool extends Application {
                     }
                 });
 
-                // Add download button to the VBox
+                // Add download button to the vBox
                 vBox.getChildren().add(downloadButton);
+
+                downloadTips = new Label();
+
+                HBox downloadBox = new HBox(5);
+                downloadBox.setAlignment(Pos.CENTER);
+                downloadBox.setPadding(new Insets(5));
+                downloadBox.getChildren().addAll(downloadTips);
+
+                vBox.getChildren().add(downloadBox);
             }
         });
+
 
         downloadTips = new Label();
 
@@ -141,5 +162,10 @@ public class ImageManagementTool extends Application {
         Scene scene = new Scene(root, 500, 500);
         stage.setScene(scene);
         stage.show();
+    }
+    private String getFileExtension(File file) {
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 }
