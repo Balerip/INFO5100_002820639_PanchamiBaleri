@@ -2,6 +2,8 @@ package com.example.finalprojectjava;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import javafx.collections.FXCollections;
@@ -28,28 +30,21 @@ public class ImageManagementTool extends Application {
 
     @Override
     public void start(Stage stage) {
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(400);
-        imageView.setFitHeight(300);
 
-        Label imageInfoLabel = new Label();
-        Label locationLabel = new Label();
-        StackPane root = new StackPane();
 
-        // Set the background color for the root node
-        root.setStyle("-fx-background-color: #C9A0DC;");
-
+        VBox root = new VBox(10);
+        root.setStyle("-fx-background-color: #e6f6fe;");
         stage.setTitle("Image Management Tool");
 
+        Label headingLabel1 = new Label("Imagement: Pixels meet giggles!!");
+        headingLabel1.setStyle("-fx-text-fill: #040813; -fx-font-size: 15pt; -fx-font-family: Helvetica;");
+        HBox headingBox = new HBox();
+        headingBox.setAlignment(Pos.TOP_CENTER);
+        headingBox.getChildren().add(headingLabel1);
+
         Button button1 = new Button("Upload an image");
-        button1.setStyle("-fx-background-color: #FFF0AA; -fx-text-fill: black;-fx-background-radius: 20;");
+        button1.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size: 12pt; -fx-font-family: Helvetica;");
 
-        HBox imageUploadBottom = new HBox(5);
-        imageUploadBottom.setAlignment(Pos.CENTER);
-        imageUploadBottom.setPadding(new Insets(5));
-        imageUploadBottom.getChildren().addAll(button1);
-
-        //creating drop down option to allow users to choose options from png,jp,jpeg and gif to convert images
         ObservableList<String> dropdownOptions = FXCollections.observableArrayList(
                 "PNG",
                 "JPG",
@@ -57,17 +52,30 @@ public class ImageManagementTool extends Application {
                 "GIF"
         );
         imageCombo = new ComboBox<>(dropdownOptions);
-        imageCombo.setPromptText("Select an option for various image formats");
+        imageCombo.setPromptText("Select Image Format");
+        imageCombo.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size: 12pt; -fx-font-family: Helvetica");
 
-        HBox dropdownBox = new HBox(5);
-        dropdownBox.setAlignment(Pos.CENTER);
-        dropdownBox.setPadding(new Insets(5));
-        dropdownBox.getChildren().addAll(imageCombo);
-        imageCombo.setStyle("-fx-background-color: #FFF0AA; -fx-background-radius: 15;");
+        Button downloadButton = new Button("Download");
+        downloadButton.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size : 12pt; -fx-font-family : Helvetica");
+        downloadButton.setFont(Font.font("System", FontWeight.BOLD, 16));
+        downloadButton.setDisable(true); // Disable initially
+
+        VBox uploadAndFormatBox = new VBox(10);
+        uploadAndFormatBox.setAlignment(Pos.CENTER);
+        uploadAndFormatBox.setPadding(new Insets(50, 10, 10, 10));
+
+        uploadAndFormatBox.getChildren().addAll(button1, imageCombo, downloadButton);
 
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(imageUploadBottom, dropdownBox);
+        vBox.getChildren().addAll(headingBox, uploadAndFormatBox);
+
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(400);
+        imageView.setFitHeight(300);
+
+        Label imageInfoLabel = new Label();
+        Label locationLabel = new Label();
 
         button1.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
@@ -98,21 +106,19 @@ public class ImageManagementTool extends Application {
 
                 // Clear previous content from vBox
                 vBox.getChildren().clear();
+                vBox.getChildren().addAll(headingBox, uploadAndFormatBox, thumbnailView, imageInfoLabel);
 
-                vBox.getChildren().addAll(imageUploadBottom, dropdownBox, thumbnailView, imageInfoLabel);
+                // Enable the download button
+                downloadButton.setDisable(false);
 
                 // Creating Download button
-                Button downloadButton = new Button("Download");
-                downloadButton.setStyle("-fx-background-color: #FFF0AA; -fx-text-fill: black;-fx-background-radius: 20;");
-
-                // Setting Download button action to allow users to download converted images
                 downloadButton.setOnAction(event -> {
                     try {
                         String selectedExtension = imageCombo.getValue().toUpperCase();
                         String originalExtension = getFileExtension(selectedFile).toUpperCase();
 
                         if (selectedExtension.equals(originalExtension)) {
-                            downloadTips.setText("Image is already in the"+"."+originalExtension.toLowerCase()+" Format. Choose a different extension for image download.");
+                            downloadTips.setText("Image is already in the" + "." + originalExtension.toLowerCase() + " Format. Choose a different extension for image download.");
                         } else {
                             FileChooser saveChooser = new FileChooser();
                             saveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(selectedExtension, "*." + selectedExtension.toLowerCase()));
@@ -148,7 +154,6 @@ public class ImageManagementTool extends Application {
             }
         });
 
-
         downloadTips = new Label();
 
         HBox downloadBox = new HBox(5);
@@ -163,6 +168,7 @@ public class ImageManagementTool extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     private String getFileExtension(File file) {
         String fileName = file.getName();
         int dotIndex = fileName.lastIndexOf('.');
