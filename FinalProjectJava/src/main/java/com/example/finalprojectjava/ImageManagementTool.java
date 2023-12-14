@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -23,6 +24,7 @@ public class ImageManagementTool extends Application {
     private ComboBox<String> imageCombo;
     private Label downloadTips;
     private ImageConverterFactory converterFactory;
+    private ColorAdjust colorAdjust = new ColorAdjust();
 
     public static void main(String[] args) {
         launch(args);
@@ -30,7 +32,6 @@ public class ImageManagementTool extends Application {
 
     @Override
     public void start(Stage stage) {
-
 
         VBox root = new VBox(10);
         root.setStyle("-fx-background-color: #e6f6fe;");
@@ -71,11 +72,36 @@ public class ImageManagementTool extends Application {
         vBox.getChildren().addAll(headingBox, uploadAndFormatBox);
 
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(400);
-        imageView.setFitHeight(300);
+        //
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+        imageView.setEffect(colorAdjust); // Apply initial color adjustment
 
         Label imageInfoLabel = new Label();
         Label locationLabel = new Label();
+
+        // Adding Color Filter ComboBox
+        ObservableList<String> colorOptions = FXCollections.observableArrayList(
+                "None",
+                "Blue",
+                "Red",
+                "Green"
+        );
+        ComboBox<String> colorCombo = new ComboBox<>(colorOptions);
+        colorCombo.setPromptText("Select Color Filter");
+        colorCombo.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size: 12pt; -fx-font-family: Helvetica");
+
+        // Handle color filter selection
+        colorCombo.setOnAction(event -> {
+            applyColorFilter(colorCombo.getValue(), imageView);
+        });
+
+        HBox colorFilterBox = new HBox(10);
+        colorFilterBox.setAlignment(Pos.CENTER);
+        colorFilterBox.getChildren().addAll(colorCombo);
+
+        // Adding Color Filter settings to vBox
+        vBox.getChildren().addAll(colorFilterBox, imageView);
 
         button1.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
@@ -98,15 +124,9 @@ public class ImageManagementTool extends Application {
                 int thumbnailWidth = 5;
                 int thumbnailHeight = 5;
 
-                // When uploaded, show image(s) thumbnail(s) (100x100) to users on GUI
-                Image thumbnail = new Image(selectedFile.toURI().toString());
-                ImageView thumbnailView = new ImageView(thumbnail);
-                thumbnailView.setFitHeight(100);
-                thumbnailView.setFitWidth(100);
-
                 // Clear previous content from vBox
                 vBox.getChildren().clear();
-                vBox.getChildren().addAll(headingBox, uploadAndFormatBox, thumbnailView, imageInfoLabel);
+                vBox.getChildren().addAll(headingBox, uploadAndFormatBox, colorFilterBox, imageView, imageInfoLabel);
 
                 // Enable the download button
                 downloadButton.setDisable(false);
@@ -167,6 +187,28 @@ public class ImageManagementTool extends Application {
         Scene scene = new Scene(root, 500, 500);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void applyColorFilter(String colorFilter, ImageView imageView) {
+        if (colorFilter != null) {
+            switch (colorFilter.toLowerCase()) {
+                case "blue":
+                    colorAdjust.setHue(0.5);
+                    break;
+                case "red":
+                    colorAdjust.setHue(-0.2);
+                    break;
+                case "green":
+                    colorAdjust.setHue(0.4);
+                    break;
+                case "none":
+                    colorAdjust.setHue(0); // Reset hue to zero for no filter
+                    break;
+                default:
+                    break;
+            }
+            imageView.setEffect(colorAdjust);
+        }
     }
 
     private String getFileExtension(File file) {
