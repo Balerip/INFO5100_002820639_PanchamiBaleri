@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -104,10 +102,10 @@ public class CalculatorApplication extends Application {
         });
 
         btclear.setOnAction(e->{
-            String a=Double.toString(getDoubleFromTextField(tfNumber1));
-            String b=Double.toString(getDoubleFromTextField(tfNumber2));
-            tfNumber1.setText(b="");
-            tfNumber2.setText(a="");
+            String a="";
+            String b="";
+            tfNumber1.setText(a);
+            tfNumber2.setText(b);
             tfResult.setText("");
         });
 
