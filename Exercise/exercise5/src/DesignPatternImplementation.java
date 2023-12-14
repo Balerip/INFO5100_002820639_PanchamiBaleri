@@ -19,14 +19,14 @@ public class DesignPatternImplementation {
 
         // Add observers to vehicles
         Observer carObserver = (Car) car;
-        Observer bicycleObserver = (Bike) bike;
+        Observer bikeObserver = (Bike) bike;
 
         //  Letting the observers know about the change of vehicle state
         ((Car) car).addObserver(carObserver);
         car.start(); // This will notify the observer
         System.out.println();
 
-        ((Bike) bike).addObserver(bicycleObserver);
+        ((Bike) bike).addObserver(bikeObserver);
         bike.start(); // This will notify the observer
     }
 }
