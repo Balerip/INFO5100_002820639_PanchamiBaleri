@@ -12,4 +12,3 @@ The method convertAndSave takes an Image object (representing the input image) a
 public interface ImageConverter {
     void convertAndSave(Image inputImage, File outputImage) throws ImageConversionException;
 }
-

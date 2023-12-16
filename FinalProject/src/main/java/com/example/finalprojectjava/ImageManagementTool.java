@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 
 
@@ -36,7 +37,7 @@ public class ImageManagementTool extends Application {
         stage.setTitle("Image Management Tool");
 
         // Set up the heading label
-        Label headingLabel1 = new Label("\n\nQuickPic Converter!!");
+        Label headingLabel1 = new Label("\n\nQuickPic Converter");
         headingLabel1.setStyle("-fx-text-fill: #040813; -fx-font-size: 16pt; -fx-font-family: Helvetica;");
         HBox headingBox = new HBox();
         headingBox.setAlignment(Pos.TOP_CENTER);
@@ -211,6 +212,7 @@ public class ImageManagementTool extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     // method to apply colour filter to the image based on various values of hue and saturation
     private void applyColorFilter(String colorFilter, ColorAdjust filterAdjust) {
         if (colorFilter != null) {
