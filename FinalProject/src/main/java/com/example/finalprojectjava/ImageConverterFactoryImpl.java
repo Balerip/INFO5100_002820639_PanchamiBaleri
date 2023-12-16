@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/*The ImageConverterFactoryImpl class implements the ImageConverterFactory interface.
+ It takes an image type as a parameter during construction,
+ and its createImageConverter method creates an instance of ImageConverter based on the specified image type.*/
 // Implementation of ImageConverterFactory
 class ImageConverterFactoryImpl implements ImageConverterFactory {
     private String imageType;

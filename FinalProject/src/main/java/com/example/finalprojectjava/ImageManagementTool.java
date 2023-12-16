@@ -146,10 +146,10 @@ public class ImageManagementTool extends Application {
                             File savedFile = saveChooser.showSaveDialog(stage);
 
                             if (savedFile != null) {
-                                /***When a user selects an image format for download,
+                                /*When a user selects an image format for download,
                                  an instance of ImageConverterFactoryImpl is created based on the selected extension.
                                  Then, the createImageConverter() method is called to obtain an ImageConverter instance.
-                                 Finally, this ImageConverter is used to convert and save the image.***/
+                                 Finally, this ImageConverter is used to convert and save the image.*/
                                 // Use the factory to create the converter
                                 converterFactory = new ImageConverterFactoryImpl(selectedExtension);
                                 ImageConverter imageConverter = converterFactory.createImageConverter();
