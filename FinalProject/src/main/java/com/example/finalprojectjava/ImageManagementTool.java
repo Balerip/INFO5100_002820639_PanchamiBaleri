@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -22,14 +23,12 @@ public class ImageManagementTool extends Application {
     private Label downloadTips;
     private ImageConverterFactory converterFactory;
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) {
-
         // Create the main VBox for the layout
         VBox root = new VBox(10);
         root.setStyle("-fx-background-color: #e6f6fe;");
@@ -42,11 +41,11 @@ public class ImageManagementTool extends Application {
         headingBox.setAlignment(Pos.TOP_CENTER);
         headingBox.getChildren().add(headingLabel1);
 
-        //create upload button
+        // create upload button
         Button button1 = new Button("Upload an image");
         button1.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size: 12pt; -fx-font-family: Helvetica;");
 
-        //creating dropdown options for image extensions
+        // creating dropdown options for image extensions
         ObservableList<String> dropdownOptions = FXCollections.observableArrayList(
                 "PNG",
                 "JPG",
@@ -57,7 +56,7 @@ public class ImageManagementTool extends Application {
         imageCombo.setPromptText("Select Image Format");
         imageCombo.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size: 12pt; -fx-font-family: Helvetica");
 
-        //create download button
+        // create download button
         Button downloadButton = new Button("Download");
         downloadButton.setStyle("-fx-background-color: #91ddfb; -fx-text-fill: #040813; -fx-font-size : 12pt; -fx-font-family : Helvetica");
         downloadButton.setDisable(true); // Disable initially
@@ -96,7 +95,9 @@ public class ImageManagementTool extends Application {
 
         // Handle color filter selection
         colorCombo.setOnAction(event -> {
-            applyColorFilter(colorCombo.getValue(), imageView);
+            ColorAdjust filterAdjust = new ColorAdjust();
+            applyColorFilter(colorCombo.getValue(), filterAdjust);
+            imageView.setEffect(filterAdjust);
         });
 
         HBox colorFilterBox = new HBox(10);
@@ -112,7 +113,7 @@ public class ImageManagementTool extends Application {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
             File selectedFile = fileChooser.showOpenDialog(stage);
-// Display selected image
+            // Display selected image
             if (selectedFile != null) {
                 Image image = new Image(selectedFile.toURI().toString());
                 imageView.setImage(image);
@@ -146,14 +147,17 @@ public class ImageManagementTool extends Application {
                             File savedFile = saveChooser.showSaveDialog(stage);
 
                             if (savedFile != null) {
-                                /*When a user selects an image format for download,
+                                // Apply color filter to the original image
+                                Image filteredImage = applyFilter(imageView.getImage(), colorCombo.getValue());
+                                 /*When a user selects an image format for download,
                                  an instance of ImageConverterFactoryImpl is created based on the selected extension.
                                  Then, the createImageConverter() method is called to obtain an ImageConverter instance.
                                  Finally, this ImageConverter is used to convert and save the image.*/
                                 // Use the factory to create the converter
                                 converterFactory = new ImageConverterFactoryImpl(selectedExtension);
                                 ImageConverter imageConverter = converterFactory.createImageConverter();
-                                imageConverter.convertAndSave(selectedFile, savedFile);
+                                imageConverter.convertAndSave(filteredImage, savedFile);
+
                                 downloadTips.setText("Download successfully");
                                 downloadTips.setStyle(" -fx-text-fill: green; -fx-font-size : 12pt; -fx-font-family : Helvetica");
                             } else {
@@ -198,12 +202,8 @@ public class ImageManagementTool extends Application {
     }
 
     // method to apply colour filter to the image based on various values of hue and saturation
-    private void applyColorFilter(String colorFilter, ImageView imageView) {
+    private void applyColorFilter(String colorFilter, ColorAdjust filterAdjust) {
         if (colorFilter != null) {
-
-            // Create a new ColorAdjust instance for each filter
-            ColorAdjust filterAdjust = new ColorAdjust();
-
             switch (colorFilter.toLowerCase()) {
                 case "blue":
                     filterAdjust.setHue(0.8);
@@ -223,15 +223,47 @@ public class ImageManagementTool extends Application {
                 default:
                     break;
             }
-
-            imageView.setEffect(filterAdjust);
         }
     }
 
-    //method to get the file extension
+    // method to get the file extension
     private String getFileExtension(File file) {
         String fileName = file.getName();
         int dotIndex = fileName.lastIndexOf('.');
         return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+    }
+
+    // Helper method to apply color filter to the image
+    private Image applyFilter(Image originalImage, String colorFilter) {
+        // Create a snapshot of the original image with the applied color filter
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        ImageView snapshotView = new ImageView(originalImage);
+
+        if (colorFilter != null) {
+            ColorAdjust filterAdjust = new ColorAdjust();
+            switch (colorFilter.toLowerCase()) {
+                case "blue":
+                    filterAdjust.setHue(0.8);
+                    break;
+                case "red":
+                    filterAdjust.setHue(-0.2);
+                    break;
+                case "green":
+                    filterAdjust.setHue(0.2);
+                    break;
+                case "none":
+                    filterAdjust.setHue(0); // Reset hue to zero for no filter
+                    break;
+                case "black-and-white":
+                    filterAdjust.setSaturation(-1.0);
+                    break;
+                default:
+                    break;
+            }
+            snapshotView.setEffect(filterAdjust);
+        }
+
+        return snapshotView.snapshot(params, null);
     }
 }
