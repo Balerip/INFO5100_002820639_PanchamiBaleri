@@ -4,8 +4,10 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 
-/* This interface declares a method convertAndSave,which is responsible for converting an input image file to a specific format
- and saving the result to an output file.The method throws an ImageConversionException to indicate that an error occurred during the image conversion process.*/
+/* This interface, named ImageConverter, declares a method named convertAndSave.
+The purpose of this interface is to define a contract for classes that will perform image conversion operations.
+The method convertAndSave takes an Image object (representing the input image) and a File object
+(representing the output file where the converted image should be saved).*/
 // Interface for ImageConverter
 public interface ImageConverter {
     void convertAndSave(Image inputImage, File outputImage) throws ImageConversionException;

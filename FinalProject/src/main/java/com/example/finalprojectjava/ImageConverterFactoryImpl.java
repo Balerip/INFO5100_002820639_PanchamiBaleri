@@ -4,16 +4,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritablePixelFormat;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+
+import javax.imageio.ImageIO;
 
 /* The ImageConverterFactoryImpl class implements the ImageConverterFactory interface.
  It takes an image type as a parameter during construction,
  and its createImageConverter method creates an instance of ImageConverter based on the specified image type. */
+
 // Implementation of ImageConverterFactory
 class ImageConverterFactoryImpl implements ImageConverterFactory {
     private String imageType;
@@ -42,8 +43,8 @@ class ImageConverterFactoryImpl implements ImageConverterFactory {
                     int[] buffer = new int[width * height];
                     pixelReader.getPixels(0, 0, width, height, format, buffer, 0, width);
 
-                    // Create BufferedImage
-                    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                    // Create BufferedImage without using SwingFXUtils
+                    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); // Use TYPE_INT_RGB
                     bufferedImage.setRGB(0, 0, width, height, buffer, 0, width);
 
                     // Perform image conversion
