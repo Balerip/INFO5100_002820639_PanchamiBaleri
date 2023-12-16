@@ -58,13 +58,14 @@ public class BookParser {
                         .put("Bob Builder")
                         .put("Charlie Author"));
         // Add newBook to the existing jsonObject
-        jsonObject.getJSONObject("BookShelf").getJSONArray("Book").put(newBook);
+        jsonObject.getJSONObject("BookShelf").getJSONArray("Book").put(jsonFromXml).put(newBook);
+
 
         // Print updated JSON
         System.out.println("\nUpdated JSON:\n" + jsonObject.toString(2));
 
         // Convert JSON back to XML
-        String updatedXmlData = XML.toString(jsonFromXml);
+        String updatedXmlData = XML.toString(jsonObject);
         System.out.println("\nXML from updated JSON:\n" + updatedXmlData);
         String formattedXmlData = updatedXmlData.replaceAll("><", ">\n<");
 
