@@ -61,5 +61,10 @@ public class BookParser {
         // Convert JSON back to XML
         String updatedXmlData = XML.toString(jsonFromXml);
         System.out.println("\nXML from updated JSON:\n" + updatedXmlData);
+        String formattedXmlData = updatedXmlData.replaceAll("><", ">\n<");
+
+        // Print the formatted XML data for better readability
+        System.out.println("\nFormatted XML from updated JSON:\n" + formattedXmlData);
+
     }
 }
