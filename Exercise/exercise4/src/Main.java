@@ -45,6 +45,7 @@ import java.util.regex.Pattern;
                 for(int i=0;i<5;i++) {
                     testPattern(pattern_list[i],cases_list[i][0],"Positive case matches pattern");
                     testPattern(pattern_list[i],cases_list[i][1], "Negative case does not match pattern");
+                    System.out.println();
                 }
 
             }
@@ -54,14 +55,14 @@ import java.util.regex.Pattern;
                 Matcher matcher = pattern.matcher(subject);
 
                 if (matcher.find()) {
-                    System.out.println(description + " - Positive Case:");
-                    System.out.println("Pattern matched in the subject: " + subject);
-                    System.out.println("Matched text: " + matcher.group());
+                    System.out.println(description);
+                    System.out.println("Positive Case : Pattern matched in the subject: " + subject);
+                    System.out.println("Matched text : " + matcher.group());
                 } else {
-                    System.out.println(description + " - Negative Case:");
-                    System.out.println("Pattern did not match in the subject: " + subject);
+                    System.out.println(description);
+                    System.out.println("Negative Case : Pattern did not match in the subject: " + subject);
                 }
-                System.out.println();
+
             }
         }
 
