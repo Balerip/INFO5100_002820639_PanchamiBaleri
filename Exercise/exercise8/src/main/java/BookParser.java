@@ -8,28 +8,30 @@ public class BookParser {
         // Sample XML
         String xmlData = "<BookShelf>" +
                 "  <Book>" +
-                "    <title>Java Programming</title>" +
+                "    <title>The Fantastic Five</title>" +
                 "    <publishedYear>2022</publishedYear>" +
                 "    <numberOfPages>500</numberOfPages>" +
                 "    <authors>" +
-                "      <author>John Doe</author>" +
-                "      <author>Jane Smith</author>" +
+                "      <author>Hero One</author>" +
+                "      <author>Hero Two</author>" +
+                "      <author>Hero Three</author>" +
+                "      <author>Hero Four</author>" +
+                "      <author>Hero Five</author>" +
                 "    </authors>" +
                 "  </Book>" +
                 "  <Book>" +
-                "    <title>Data Structures and Algorithms</title>" +
+                "    <title>Introduction to C</title>" +
                 "    <publishedYear>2020</publishedYear>" +
                 "    <numberOfPages>400</numberOfPages>" +
                 "    <authors>" +
-                "      <author>Alan Turing</author>" +
+                "      <author>Coding Guru</author>" +
                 "    </authors>" +
                 "  </Book>" +
                 "  <Book>" +
-                "    <title>Web Development with JavaScript</title>" +
-                "    <publishedYear>2021</publishedYear>" +
-                "    <numberOfPages>300</numberOfPages>" +
+                "    <title>Twilight</title>" +
+                "    <publishedYear>2005</publishedYear>" +
                 "    <authors>" +
-                "      <author>Grace Hopper</author>" +
+                "      <author>Stephenie Meyer</author>" +
                 "    </authors>" +
                 "  </Book>" +
                 "</BookShelf>";
@@ -46,13 +48,16 @@ public class BookParser {
         JSONObject jsonObject = new JSONObject(jsonData);
         System.out.println("\nParsed JSON:\n" + jsonObject.toString(2));
 
+
         // Add an additional entry programmatically
         JSONObject newBook = new JSONObject()
-                .put("title", "Introduction to Programming")
-                .put("publishedYear", 2023)
-                .put("numberOfPages", 250)
-                .put("authors", new JSONArray().put("Alice Wonderland").put("Bob Builder"));
-
+                .put("title", "Updated Title")
+                .put("numberOfPages", 300)
+                .put("authors", new JSONArray()
+                        .put("Alice Wonderland")
+                        .put("Bob Builder")
+                        .put("Charlie Author"));
+        // Add newBook to the existing jsonObject
         jsonObject.getJSONObject("BookShelf").getJSONArray("Book").put(newBook);
 
         // Print updated JSON
